@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form class="site-form has-background-light" method="post" enctype="multipart/form-data"
+      style="margin-top: 100px">
+    <h2 class="title is-size-2 has-text-centered">Comment Tahrirlash</h2>
+        {% csrf_token %}
+        {{ form }}
+    <div class="has-text-centered mt-4">
+        <button type="submit" class="button is-success">Yakunlash</button>
+        <a href="{% url 'article_detail' article.slug %}"
+           class="button is-danger">Ortga Qaytish</a>
+    </div>
+</form>
+{% endblock %}

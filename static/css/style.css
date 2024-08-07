@@ -1,0 +1,39 @@
+.site-form{
+    padding: 20px;
+    display: block;
+    margin: 70px auto auto;
+    width: 40%;
+    border-radius: 10px;
+ }
+ .site-form label{
+    color: black;
+    font-size: 20px;
+ }
+.site-form input{
+    width: 100%;
+    height: 25px;
+ }
+ .site-form textarea{
+    width: 100%;
+ }
+ #thumb-clear_id {
+    display: none;
+ }
+
+ label[for="thumb-clear_id"] {
+    display: none;
+ }
+
+
+ .helptext, .helptext.ul {
+   margin: 0 auto 20px;
+   color: grey;
+   font-size: 15px;
+   display: block;
+}
+
+.errorlist {
+   padding: 10px;
+   list-style: none;
+   color: red;
+}

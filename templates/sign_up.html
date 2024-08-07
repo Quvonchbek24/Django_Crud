@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}
+    ">
+    <form method="post" class="site-form has-text-centered has-background-light"
+        style="margin-top: -120px; margin-left: 650px; border-radius: 20px; padding: 50px;">
+        <h1 class="title is-size-2 has-text-centered has-text-black">Sign up</h1>
+        {% csrf_token %}
+        {{ form }} <br>
+        <button class="button is-primary is-fullwidth" type="submit">Sign up</button>
+
+        <p class="content mt-3">
+            Sizda oldinroq akkountiz bo'lganmi?
+            <span>
+                <a href="{% url 'sign_in' %}">Akkountga kirish</a>
+            </span>
+        </p>
+
+    </form>
+{% endblock content %}
+
+

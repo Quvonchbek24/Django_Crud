@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" class="site-form has-background-light"
+    style="margin-top: 200px">
+        {% csrf_token %}
+        <p class="content has-text-centered is-size-4 mb-4">
+            Siz shu postni o'chirmoqchimi {{ article }}?
+        </p>
+
+        <div class="has-text-centered">
+            <button class="button is-primary" type="submit">Ha</button>
+            <a href="{% url 'article_detail' article.slug %}" class="button is-danger">Yoq</a>
+        </div>
+    </form>
+{% endblock content %}

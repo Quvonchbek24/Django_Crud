@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <form class="site-form has-background-light" method="post"
+          enctype="multipart/form-data" style="margin-left: 670px; padding: 70px; border-radius: 20px;">
+        <h2 class="title is-size-2 has-text-centered">Postni tahrirlash</h2>
+        {% csrf_token %}
+        {{ form }}
+        <div class="has-text-centered my-4">
+            <button class="button is-success" type="submit">Saqlash</button>
+            <a href="{% url 'article_edit' article.slug %}" class="button is-danger">
+                Ortga qaytish
+            </a>
+        </div>
+    </form>
+{% endblock content %}

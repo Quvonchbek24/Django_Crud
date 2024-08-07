@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <form method="post" class="site-form has-text-centered has-background-light"
+        style="margin-top: -170px; margin-left: 680px; padding: 80px; border-radius: 20px;">
+        <h1 class="title is-size-2 has-text-centered has-text-black">Sign in</h1>
+        {% csrf_token %}
+        {{ form }} <br>
+        <button class="button is-primary is-fullwidth" type="submit">Sign in</button>
+        <br>
+        <a href="{% url 'sign_up' %}">Ro'yxatdan o'tish</a>
+    </form>
+{% endblock content %}
+
+

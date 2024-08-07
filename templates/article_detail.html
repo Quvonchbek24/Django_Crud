@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column">
+                <div class="box">
+                    <div class="title has-text-dark has-text-centered my-6">
+                        {{ article }}
+                    </div>
+                    <img src="{{ article.thumb.url }}" alt="" class="image is-centered"
+                    style="min-width: 100%; border-radius: 5px">
+                    <div class="subtitle has-text-dark has-text-centered my-6">{{ article.text }}</div>
+
+                    {% if user not in article.likes.all and user not in article.dislikes.all %}
+                    <div class="columns">
+                    <div class="column is-1">
+                        <form action="{% url 'article_like' article.slug %}" method="post" class="has-text-right">
+                            {% csrf_token %}
+                            <button type="submit" class="button">
+                                <ion-icon name="thumbs-up-outline"></ion-icon>
+                                <span class="ml-2">{{ article.total_likes }}</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="column is-1">
+                        <form action="{% url 'article_dislike' article.slug %}" method="post" class="has-text-right">
+                            {% csrf_token %}
+                            <button type="submit" class="button">
+                                <ion-icon name="thumbs-down-outline"></ion-icon>
+                                <span class="ml-2">{{ article.total_dislikes }}</span>
+
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                    {% endif %}
+
+                    {% if user in article.likes.all and user not in article.dislikes.all %}
+                    <div class="columns">
+                    <div class="column is-1">
+                        <form action="{% url 'article_like' article.slug %}" method="post" class="has-text-right">
+                            {% csrf_token %}
+                            <button type="submit" class="button is-success">
+                                <ion-icon name="thumbs-up-outline"></ion-icon>
+                                <span class="ml-2">{{ article.total_likes }}</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="column is-1">
+                        <form action="{% url 'article_dislike' article.slug %}" method="post" class="has-text-right">
+                            {% csrf_token %}
+                            <button type="submit" class="button">
+                                <ion-icon name="thumbs-down-outline"></ion-icon>
+                                <span class="ml-2">{{ article.total_dislikes }}</span>
+
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                    {% endif %}
+
+                    {% if user not in article.likes.all and user in article.dislikes.all %}
+                    <div class="columns">
+                    <div class="column is-1">
+                        <form action="{% url 'article_like' article.slug %}" method="post" class="has-text-right">
+                            {% csrf_token %}
+                            <button type="submit" class="button">
+                                <ion-icon name="thumbs-up-outline"></ion-icon>
+                                <span class="ml-2">{{ article.total_likes }}</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="column is-1">
+                        <form action="{% url 'article_dislike' article.slug %}" method="post" class="has-text-right">
+                            {% csrf_token %}
+                            <button type="submit" class="button is-danger">
+                                <ion-icon name="thumbs-down-outline"></ion-icon>
+                                <span class="ml-2">{{ article.total_dislikes }}</span>
+
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                    {% endif %}
+
+                    {% if not article.comment_set.all %}
+                        <div class="has-text-centered has-text-grey-light is-size-5 mx-5">
+                            Bu postda hech kim komment yozmagan
+                        </div>
+                    {% else %}
+                        <p class="has-text-centered is-size-3 mb-6">Sharxlar</p>
+                        {% for comment in article.comment_set.all %}
+                            <article class="message is-info">
+                                <div class="message-header">
+                                    {{ comment.user }} tomonidan {{ comment.date_added }} da
+                                    <!-- -->
+                                    <div class="has-text-right is-size-5">
+                                        {% if user == comment.user %}
+                                        <a href="{% url 'comment_edit' slug=article.slug pk=comment.pk %}"
+                                                style="text-decoration: none">
+                                                <ion-icon name="create-outline"></ion-icon>
+                                        </a>
+
+                                        <a href="{% url 'comment_delete' slug=article.slug pk=comment.pk %}"
+                                            style="text-decoration: none">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </a>
+                                        {% endif %}
+
+                                    </div>
+                                    <!-- -->
+                                </div>
+                                <div class="message-body">{{ comment.body }}</div>
+                            </article>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST" class="comment">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="button is-success mt-3 is-fullwidth">Yuborish</button>
+                    </form>
+
+                </div>
+
+                <div class="has-text-right">
+                    <a href="{% url 'article_edit' article.slug %}" class="button is-info">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </a>
+
+                    <a href="{% url 'article_delete' article.slug %}" class="button is-danger">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

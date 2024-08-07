@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <form method="post" class="site-form has-background-light">
+       
+       {% csrf_token %}
+       <p class="content is-size-4 mb-4">Komentariyani O'chirishga Rozimisiz</p>
+       <div class="has-text-centered">
+           <button type="submit" class="button is-primary">O'chirish</button>
+           <a href="{% url 'article_detail' comment.article.slug %}" class='button is-danger'>Ortga Qaytish</a>
+       </div>
+   </form>
+{% endblock %}
